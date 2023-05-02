@@ -8,6 +8,10 @@ const Code = () => {
   const handleNumberInput = (e) => {
     setNumberInput(e.target.value)
   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900 pt-20 md:pt-0">
@@ -17,7 +21,7 @@ const Code = () => {
               Forgot your password?
             </h1>
             <p className="font-light text-gray-500 dark:text-gray-400">Don't fret! Just type in the 6 digits letters code we sent to a***************@gmail.com!</p>
-            <form className="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="#">
+            <form className="mt-4 space-y-4 lg:mt-5 md:space-y-5" onSubmit={handleSubmit} action="#">
               <div>
                 <label for="number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter code</label>
                 <input value={numberInput} onChange={handleNumberInput} type="number" name="number" id="number" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="*** *** ***" required="" />

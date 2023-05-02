@@ -6,8 +6,12 @@ const Signup = () => {
   const [input, setInput] = useState({name: '', lastName: '', email: '', Password: '', confirmPassword: ''});
 
   const handleInput = (e) => {
-      setInput(e.target.value)
-  }
+    setInput(e.target.value)
+    e.preventDefault();
+}
+const handleSubmit = (e) => {
+  e.preventDefault();
+}
 
   return (
     <div>
@@ -18,7 +22,7 @@ const Signup = () => {
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Create and account
               </h1>
-              <form class="space-y-4 md:space-y-6" action="#">
+              <form class="space-y-4 md:space-y-6" onSubmit={handleSubmit} action="#">
                 <div className='flex space-x-5'>
                   <div>
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
