@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const code = () => {
+const Code = () => {
 
+  const [numberInput, setNumberInput] = useState('')
+
+  const handleNumberInput = (e) => {
+    setNumberInput(e.target.value)
+  }
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900 pt-20 md:pt-0">
@@ -15,7 +20,7 @@ const code = () => {
             <form className="mt-4 space-y-4 lg:mt-5 md:space-y-5" action="#">
               <div>
                 <label for="number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter code</label>
-                <input type="number" name="number" id="number" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="*** *** ***" required="" />
+                <input value={numberInput} onChange={handleNumberInput} type="number" name="number" id="number" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="*** *** ***" required="" />
               </div>
               <div className="ml-3 text-center text-sm">
                 <label for="terms" className="font-light text-gray-500 dark:text-gray-300">Didn't get a code <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Click here</a></label>
@@ -29,4 +34,4 @@ const code = () => {
   )
 }
 
-export default code
+export default Code
