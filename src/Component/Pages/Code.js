@@ -23,11 +23,11 @@ const Code = () => {
             <p className="font-light text-gray-500 dark:text-gray-400">Don't fret! Just type in the 6 digits letters code we sent to a***************@gmail.com!</p>
             <form className="mt-4 space-y-4 lg:mt-5 md:space-y-5" onSubmit={handleSubmit} action="#">
               <div>
-                <label for="number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter code</label>
+                <label htmlFor="number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Enter code</label>
                 <input value={numberInput} onChange={handleNumberInput} type="number" name="number" id="number" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="*** *** ***" required="" />
               </div>
               <div className="ml-3 text-center text-sm">
-                <label for="terms" className="font-light text-gray-500 dark:text-gray-300">Didn't get a code <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Click here</a></label>
+                <label htmlFor="terms" className="font-light text-gray-500 dark:text-gray-300">Didn't get a code <Link  to='/' className="font-medium text-primary-600 hover:underline dark:text-primary-500">Click here</Link></label>
               </div>
               <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"><Link to='/ResetPassword'>Reset password</Link></button>
             </form>

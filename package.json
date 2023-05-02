@@ -40,6 +40,7 @@
     ]
   },
   "devDependencies": {
+    "source-map-loader": "^4.0.1",
     "tailwindcss": "^3.3.1"
   }
 }
