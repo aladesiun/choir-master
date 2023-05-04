@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const HomePagesSec = () => {
   return (
     <section className="bg-gray-50 dark:bg-gray-900 py-32 px-6">
-      <div className='container max-w-5xl w-full m-auto border bg-white dark:bg-gray-800 rounded-lg border-gray-100 dark:border-gray-700 p-6 sm:px-8 grid grid-cols-1 md:grid-cols-2 gap-8'>
+      <div className='container max-w-5xl m-auto border bg-white dark:bg-gray-800 rounded-lg border-gray-100 dark:border-gray-700 p-6 sm:px-8'>
         <div className='wrapper m-auto border rounded border-gray-100 dark:border-gray-700 space-x-2 sm:space-x-3 w-full shadow'>
           <div className='img flex space-x-4 items-center'>
             <img className=' object-cover' src='img/music.Png' alt='image'></img>
