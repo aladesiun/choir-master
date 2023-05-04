@@ -1,11 +1,15 @@
 import React from 'react'
-import Login from './Pages/Login'
+import HomePagesSec from './Pages/HomePagesSec'
+// import Login from './Pages/Login'
+// import HomePage from './HomePage'
 
 const MainPage = () => {
 
   return (
     <div>
-      <Login />
+      {/* <HomePage /> */}
+      {/* <Login /> */}
+      <HomePagesSec />
     </div>
   )
 }
