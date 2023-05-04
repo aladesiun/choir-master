@@ -8,6 +8,7 @@ import Signup from './Component/Pages/Signup';
 import Login from './Component/Pages/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Footer from './Component/Footer';
+import HomePagesSec from './Component/Pages/HomePagesSec';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path='/Code' element={<Code />}/>
             <Route path='/Signup' element={<Signup />}/>
             <Route path='/Login' element={<Login />}/>
+            <Route path='/HomePagesSec' element={<HomePagesSec />}/>
         </Routes>
         <Footer />
       </BrowserRouter>
