@@ -164,4 +164,23 @@ app.get('/api/songs/:id', (req, res) => {
 
 });
 
+// query  songs
+app.get('/api/songs/', (req, res) => {
+    
+    const { title, username} = req.body;
+
+
+    db.query(title ? "SELECT * FROM songs WHERE title =" + title : "SELECT * FROM songs WHERE user_id =" +userId , (err, result) => {
+        if (err) {
+            console.log(err);
+            return res.status(500).json({ message: 'Internal server error.', });
+        }
+
+        // Generate a JWT token with the new song ID and score
+        let response = {result, status: 200 }
+        res.json(response);
+    });
+
+});
+
 
