@@ -6,6 +6,12 @@ const HomePagesSec = () => {
   const {id} = useParams();
   useEffect(() => {
       axios.get("http://localhost:4000/api/songs")
+      // .then((res) => {
+      //   console.log(res.data.songs);
+      //   setSongDetails(res.data.songs);
+      // })
+      .then(res => console.log(res.data.songs))
+      .then(data => console.log(data))
       .then((data) => {const newSong = data.find((song) => song.id === parseInt(id));
        setSongDetails(newSong);
       console.log(setSongDetails)
