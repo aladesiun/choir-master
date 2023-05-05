@@ -85,6 +85,25 @@ app.post('/api/user/login', (req, res) => {
     });
 });
 
+// Verify user endpoint
+app.post('/api/user/verify', (req, res) => {
+    const { token } = req.body;
+  
+    // Check if the token was provided
+    if (!token) {
+      return res.status(400).json({ message: 'Token is required.' });
+    }
+  
+    // Verify the token and extract the user ID and email
+    try {
+      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+      const { id, email } = decodedToken;
+      res.json({ id, email, verified: true });
+    } catch (err) {
+      console.log(err);
+      return res.status(401).json({ message: 'Invalid token.' });
+    }
+  });
 
 
 
@@ -131,22 +150,4 @@ app.get('/api/songs', (req, res) => {
 
 
 
-// Verify user endpoint
-app.post('/api/user/verify', (req, res) => {
-  const { token } = req.body;
 
-  // Check if the token was provided
-  if (!token) {
-    return res.status(400).json({ message: 'Token is required.' });
-  }
-
-  // Verify the token and extract the user ID and email
-  try {
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-    const { id, email } = decodedToken;
-    res.json({ id, email, verified: true });
-  } catch (err) {
-    console.log(err);
-    return res.status(401).json({ message: 'Invalid token.' });
-  }
-});
