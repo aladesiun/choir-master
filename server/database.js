@@ -1,6 +1,6 @@
 const { createConnection } = require("mysql");
 
-const pool = createConnection({
+const db = createConnection({
     host:"127.0.0.1",
     port:"8889",
     database:"choir_master",
@@ -10,4 +10,4 @@ const pool = createConnection({
 })
 
 
-module.exports = pool;
+module.exports = db;

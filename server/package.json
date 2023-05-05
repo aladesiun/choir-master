@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":  "node -r esm",
+    "dev": "node -r esm",
     "start": "nodemon -r esm"
   },
   "keywords": [],
   "author": "Owolabi femi",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "consola": "^3.1.0",
