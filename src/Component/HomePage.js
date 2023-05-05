@@ -15,10 +15,10 @@ const HomePage = () => {
   return (
     <section className="bg-gray-50 dark:bg-gray-900 py-32 px-3 lg:px-6">
       <div>
-        <Link to="/HomePagesSec">
-          <ul className="container max-w-5xl m-auto border bg-white dark:bg-gray-800 rounded-lg border-gray-100 dark:border-gray-700 px-3 p-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8">
-            {allSongs.map((song, index) => (
-              <li key={index}>
+        <ul className="container max-w-5xl m-auto border bg-white dark:bg-gray-800 rounded-lg border-gray-100 dark:border-gray-700 px-3 p-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8">
+          {allSongs.map((song, index) => (
+            <li key={index}>
+              <Link to={`/HomePagesSec/${index}`}>
                 <div className="wrapper m-auto hover:shadow-lg border rounded border-gray-100 dark:border-gray-700 relative flex space-x-2 sm:space-x-3 w-full shadow">
                   <div className="img">
                     <img
@@ -39,10 +39,10 @@ const HomePage = () => {
                     </h4>
                   </div>
                 </div>
-              </li>
-            ))}
-          </ul>
-        </Link>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
