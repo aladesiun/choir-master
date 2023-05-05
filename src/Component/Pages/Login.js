@@ -2,22 +2,25 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 const Login = () => {
-  const [login, setLogin] = useState(
+  const [loginDetails, setLoginDetails] = useState(
     { 
         password: "",
         email: '',
     }
     );
-
+    
   const handleInput = (e) => {
     const { name, value} = e.target;
-    setLogin({...login, [name]:value});
+    setLoginDetails({...loginDetails, [name]:value});
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:4000/api/user/login', {login})
+    console.log(loginDetails)
+    axios.post('http://localhost:4000/api/user/login', loginDetails)
     .then(response => console.log(response))
     .catch(err => console.log(err));
+  
   };
 
   return (
@@ -34,7 +37,6 @@ const Login = () => {
                 onSubmit={handleSubmit}
                 action="#"
               >
-    
                 <div>
                   <label
                     htmlFor="email"
@@ -43,7 +45,7 @@ const Login = () => {
                     Your Email
                   </label>
                   <input
-                    value={login.email}
+                    value={loginDetails.email}
                     onChange={handleInput}
                     type="email"
                     name="email"
@@ -60,7 +62,7 @@ const Login = () => {
                     Password
                   </label>
                   <input
-                    value={login.password}
+                    value={loginDetails.password}
                     onChange={handleInput}
                     type="password"
                     name="password"

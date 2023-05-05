@@ -10,6 +10,7 @@ const Signup = () => {
     e.preventDefault();
 }
 const handleSubmit = (e) => {
+  
   e.preventDefault();
 }
 
