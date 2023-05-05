@@ -7,6 +7,7 @@ const Signup = () => {
     password: "",
     email: "",
   });
+  const [userToken, setUserToken] = useState([]);
   const handleInput = (e) => {
     const { name, value} = e.target;
     setSignUpDetails({...signUpDetails, [name]:value});
@@ -14,9 +15,13 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('http://localhost:4000/api/user/create', signUpDetails)
-    .then(response => console.log(response))
-    .catch(err => console.log(err));
+    .then(response =>{
+      localStorage.setItem('user', JSON.stringify(response.data))
+    })
+    .catch(err => console.log(err)); 
+    
   };
+  console.log(userToken)
 
   return (
     <div>

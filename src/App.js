@@ -22,7 +22,7 @@ function App() {
             <Route path='/Code' element={<Code />}/>
             <Route path='/Signup' element={<Signup />}/>
             <Route path='/Login' element={<Login />}/>
-            <Route path='/HomePagesSec' element={<HomePagesSec />}/>
+            <Route path='/HomePagesSec/:id' element={<HomePagesSec />}/>
         </Routes>
         <Footer />
       </BrowserRouter>
