@@ -12,7 +12,7 @@ const HomePagesSec = () => {
       let song = data.data.result;
       setSongDetails(song);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => alert(err.response.data.message));
   }
 
   useEffect(() => {
