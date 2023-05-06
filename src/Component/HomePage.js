@@ -4,17 +4,21 @@ import axios from "axios";
 const HomePage = () => {
   const [allSongs, setAllSongs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  
   useEffect(() => {
     setIsLoading(true);
     axios
       .get("http://localhost:4400/api/songs/")
       .then((res) => {
-        console.log(res.data.songs);
+        setIsLoading(false);
+
         setAllSongs(res.data.songs);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setIsLoading(false);
+        alert(err.response.data.message)
+      });
 
-    setIsLoading(false);
   }, []);
   return (
     <section className="bg-gray-50 dark:bg-gray-900 py-32 px-3 lg:px-6">
