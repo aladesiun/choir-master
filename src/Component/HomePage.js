@@ -7,7 +7,7 @@ const HomePage = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get("http://localhost:4000/api/songs")
+      .get("http://localhost:4400/api/songs/")
       .then((res) => {
         console.log(res.data.songs);
         setAllSongs(res.data.songs);
@@ -49,7 +49,7 @@ const HomePage = () => {
           <ul className="container max-w-5xl m-auto border bg-white dark:bg-gray-800 rounded-lg border-gray-100 dark:border-gray-700 px-3 p-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-8">
             {allSongs.map((song, index) => (
               <li key={index}>
-                <Link to={`/HomePagesSec/${index}`}>
+                <Link to={`/song/${song.id}`}>
                   <div className="wrapper m-auto hover:shadow-lg border rounded border-gray-100 dark:border-gray-700 relative flex space-x-2 sm:space-x-3 w-full shadow">
                     <div className="img">
                       <img

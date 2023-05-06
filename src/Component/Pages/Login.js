@@ -16,9 +16,15 @@ const Login = () => {
     e.preventDefault();
     console.log(loginDetails);
     axios
-      .post("http://localhost:4000/api/user/login", loginDetails)
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err.response));
+      .post("http://localhost:4400/api/user/login", loginDetails)
+      .then((response) => {
+        if (response.data.status == 200) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+          window.location.href="/";
+      }
+      })
+
+      .catch((err) =>alert(err.response.data.message));
       setError()
   };
 

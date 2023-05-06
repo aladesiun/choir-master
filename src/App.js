@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Footer from './Component/Footer';
 import HomePagesSec from './Component/Pages/HomePagesSec';
 import { SkeletonTheme } from 'react-loading-skeleton';
+import NewSong from './Component/Pages/NewSong';
 function App() {
   return (
     <div className="App">
@@ -23,7 +24,8 @@ function App() {
             <Route path='/Code' element={<Code />}/>
             <Route path='/Signup' element={<Signup />}/>
             <Route path='/Login' element={<Login />}/>
-            <Route path='/HomePagesSec/:id' element={<HomePagesSec />}/>
+            <Route path='/song/:id' element={<HomePagesSec />}/>
+            <Route path='/song/create' element={<NewSong />}/>
         </Routes>
         <Footer />
       </BrowserRouter>
