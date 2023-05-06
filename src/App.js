@@ -13,7 +13,7 @@ import { SkeletonTheme } from 'react-loading-skeleton';
 function App() {
   return (
     <div className="App">
-      <SkeletonTheme baseColor='#313131'>
+      <SkeletonTheme baseColor='#be3bd1' highlightColor='#be3bd1'>
       <BrowserRouter>
       <Header />
         <Routes>
