@@ -2,25 +2,30 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 const Login = () => {
-  const [loginDetails, setLoginDetails] = useState(
-    { 
-        password: "",
-        email: '',
-    }
-    );
-    
+  const [loginDetails, setLoginDetails] = useState({
+    password: "",
+    email: "",
+  });
+  const [error, setError] = useState('')
   const handleInput = (e) => {
-    const { name, value} = e.target;
-    setLoginDetails({...loginDetails, [name]:value});
+    const { name, value } = e.target;
+    setLoginDetails({ ...loginDetails, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(loginDetails)
-    axios.post('http://localhost:4000/api/user/login', loginDetails)
-    .then(response => console.log(response))
-    .catch(err => console.log(err));
-  
+    console.log(loginDetails);
+    axios
+      .post("http://localhost:4400/api/user/login", loginDetails)
+      .then((response) => {
+        if (response.data.status == 200) {
+          localStorage.setItem("user", JSON.stringify(response.data));
+          window.location.href="/";
+      }
+      })
+
+      .catch((err) =>alert(err.response.data.message));
+      setError()
   };
 
   return (
@@ -79,7 +84,6 @@ const Login = () => {
                         aria-describedby="remember"
                         type="checkbox"
                         className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-
                       />
                     </div>
                     <div className="ml-3 text-sm">

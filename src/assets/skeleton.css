@@ -1,0 +1,37 @@
+.skeleton{
+    opacity: .7;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+.skeleton-img{
+    width:97px;
+    height: 97px;
+}
+.skeleton-text{
+    width: 127px;
+    height: .5rem;
+    border-radius: 30px;
+}
+.skeleton-title {
+    width: 147px;
+    height: .4rem;
+    margin-bottom: .25rem;
+    border-radius: 30px;
+}
+.skeleton-text:last-child{
+    margin-bottom: 0;
+}
+.skeleton-id{
+    width: 147px;
+    height: 20px;
+    margin-bottom: .25rem;
+    border-radius: 30px;
+}
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 20%, 70%);
+    }
+
+    100%{
+        background-color: hsl(200, 20%, 95%);
+    }
+}

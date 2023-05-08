@@ -78,7 +78,7 @@ app.post('/api/user/login', (req, res) => {
 
             // Generate a JWT token with the new user ID and email
             const token = jwt.sign({ id: result.insertId, email }, process.env.JWT_SECRET, { expiresIn: '6h' });
-            let response = { username: user.username, icon: user.icon, token: token };
+            let response = { username: user.username, icon: user.icon, token: token, status: 200 };
             res.json(response);
 
         });
@@ -97,8 +97,8 @@ app.post('/api/user/verify', (req, res) => {
     // Verify the token and extract the user ID and email
     try {
       const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-      const { id, email } = decodedToken;
-      res.json({ id, email, verified: true });
+      const { id, email, username, } = decodedToken;
+      res.json({ id, email, username, token, verified: true });
     } catch (err) {
       console.log(err);
       return res.status(401).json({ message: 'Invalid token.' });
@@ -158,7 +158,7 @@ app.get('/api/songs/:id', (req, res) => {
         }
 
         // Generate a JWT token with the new song ID and score
-        let response = {result, status: 200 }
+        let response = {result: result[0], status: 200 }
         res.json(response);
     });
 
