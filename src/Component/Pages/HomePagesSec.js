@@ -17,7 +17,6 @@ const HomePagesSec = () => {
 
   useEffect(() => {
     getSong();
-    console.log(songDetails);
   }, []);
 
   return (
