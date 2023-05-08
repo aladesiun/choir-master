@@ -31,8 +31,12 @@ const NewSong = () => {
         e.preventDefault();
 
         axios.post("http://localhost:4400/api/songs/create", newSong)
-        .then((response) => console.log(response))
-        .catch((err) => console.log(err));
+        .then((response) => {
+            if(response.data.status ==  200) {
+                alert(response.data.message)
+            }
+        })
+        .catch((err) => alert(err.response.data.message));
     }
   return (
     <div className="my-5">
