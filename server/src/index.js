@@ -109,7 +109,7 @@ app.post('/api/user/verify', (req, res) => {
 
 // / Create song endpoint
 app.post('/api/songs/create', (req, res) => {
-    const { title, score, song_key , token} = req.body;
+    const { title, score, song_key} = req.body;
 
     // Check if the title, score, and song_key were provided
     if (!title || !score || !song_key) {
