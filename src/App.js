@@ -1,15 +1,15 @@
 import './App.css';
 import Header from './Component/Header';
 import MainPage from './Component/MainPage';
-import ForgotPassword from './Component/Pages/ForgotPassword';
-import ResetPassword from './Component/Pages/ResetPassword';
-import Code from './Component/Pages/Code';
-import Signup from './Component/Pages/Signup';
-import Login from './Component/Pages/Login';
+import ForgotPassword from './views/ForgotPassword';
+import ResetPassword from './views/ResetPassword';
+import Code from './views/Code';
+import Signup from './views/Signup';
+import Login from './views/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Footer from './Component/Footer';
-import Song from './Component/Pages/Song';
-import NewSong from './Component/Pages/NewSong';
+import Song from './views/Song';
+import NewSong from './views/NewSong';
 function App() {
   return (
     <div className="App">
