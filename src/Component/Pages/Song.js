@@ -43,7 +43,10 @@ const HomePagesSec = () => {
             </div>
             <div>
               <h1 className="text-bold text-xl sm:text-2xl">Lyrics :</h1>
-              {songDetails.score} 
+              {/* {songDetails.score}  */}
+              <div> {songDetails.score} </div>
+              
+              
             
             </div>
           </div>
