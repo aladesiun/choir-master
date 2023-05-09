@@ -20,12 +20,12 @@ const Login = () => {
       .then((response) => {
         if (response.data.status == 200) {
           localStorage.setItem("user", JSON.stringify(response.data));
-          window.location.href="/";
-      }
+          window.location.href = "/";
+        }
       })
 
-      .catch((err) =>alert(err.response.data.message));
-      setError()
+      .catch((err) => alert(err.response.data.message));
+    setError()
   };
 
   return (
@@ -50,6 +50,7 @@ const Login = () => {
                     Your Email
                   </label>
                   <input
+                    required
                     value={loginDetails.email}
                     onChange={handleInput}
                     type="email"
@@ -67,6 +68,7 @@ const Login = () => {
                     Password
                   </label>
                   <input
+                    required
                     value={loginDetails.password}
                     onChange={handleInput}
                     type="password"
@@ -80,6 +82,7 @@ const Login = () => {
                   <div className="flex items-start">
                     <div className="flex items-center h-5">
                       <input
+                        required
                         id="remember"
                         aria-describedby="remember"
                         type="checkbox"
