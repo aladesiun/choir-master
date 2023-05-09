@@ -1,7 +1,7 @@
 import React from 'react'
 // import HomePagesSec from './Pages/HomePagesSec'
 // import Login from './Pages/Login'
-import HomePage from './Home'
+import HomePage from './Pages/Home'
 
 const MainPage = () => {
 

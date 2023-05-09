@@ -8,7 +8,7 @@ import Signup from './Component/Pages/Signup';
 import Login from './Component/Pages/Login';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Footer from './Component/Footer';
-import Song from './Component/Pages/Song';
+import Song from './Component/Song';
 import NewSong from './Component/Pages/NewSong';
 function App() {
   return (

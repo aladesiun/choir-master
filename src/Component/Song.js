@@ -25,7 +25,7 @@ const HomePagesSec = () => {
         {
           <div className="wrapper m-auto border rounded border-gray-100 dark:border-gray-700 space-x-2 sm:space-x-3 w-full shadow">
             <div className="img flex space-x-4 items-center">
-              <img className=" object-cover" src="img/music.Png" alt="image" />
+              <img className=" object-cover"   src={"img/music.Png"} alt="image" />
             </div>
             <div className="py-3 pb-12 sm:py-0 sm:pb-0">
               <h1 className="text-lg sm:text-xl font-semibold dark:text-gray-50 text-gray-900 pt-4">
