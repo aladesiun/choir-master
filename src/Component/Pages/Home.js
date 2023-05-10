@@ -120,12 +120,10 @@ const HomePage = () => {
                     <h1 className="text-base sm:text-xl font-semibold dark:text-gray-50 text-gray-900 pt-4">
                       {song.title}
                     </h1>
-                    <h1 className="text-[11px] sm:text-sm font-semibold dark:text-gray-50 text-gray-900">
-                      <i className="fas fa-clock pr-1"></i> 5 min ago
-                    </h1>
-                    <h4 className=" my-3 text-[9px] sm:text-xs right-2 bg-gray-900 text-gray-50 dark:bg-gray-50 dark:text-gray-900 rounded-2xl p-3 py-1 font-medium ">
-                      <i className="fas fa-user pr-1"></i>By Alec Benjamin
-                    </h4>
+                   
+                    <div className="block mr-auto my-3 text-[9px] sm:text-xs  bg-gray-900 text-gray-50 dark:bg-gray-50 dark:text-gray-900 rounded-2xl p-3 py-1 font-medium ">
+                      <i className="fas fa-user pr-1"></i>By {song.author}
+                    </div>
                   </div>
                 </Link>
               </li>

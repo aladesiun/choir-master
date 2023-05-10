@@ -36,7 +36,7 @@ app.post('/api/user/create', (req, res) => {
 
             // Generate a JWT token with the new user ID and email
             const token = jwt.sign({ id: result.insertId, email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-            let response = { username: username, token: token, status: 200 }
+            let response = {id:result.insertId, username: username, token: token, status: 200, result }
             res.json(response);
         });
     });
@@ -78,10 +78,11 @@ app.post('/api/user/login', (req, res) => {
 
             // Generate a JWT token with the new user ID and email
             const token = jwt.sign({ id: result.insertId, email }, process.env.JWT_SECRET, { expiresIn: '6h' });
-            let response = { username: user.username, icon: user.icon, token: token, status: 200 };
+            let response = { id:user.id, username: user.username, icon: user.icon, token: token, status: 200 };
             res.json(response);
 
         });
+       
     });
 });
 
@@ -117,18 +118,16 @@ const verifyToken = (token)=>{
 
 // / Create song endpoint
 app.post('/api/songs/create', (req, res) => {
-    const { title, score, song_key} = req.body;
+    const { title, score, song_key, id, author} = req.body;
 
     // Check if the title, score, and song_key were provided
     if (!title || !score || !song_key) {
         return res.status(400).json({ message: 'title, score, and song_key are required.' });
     }
-    let decodedToken= verifyToken(token);
 
-    let {id } =decodedToken; 
 
     // Insert the new song into the database
-    db.query('INSERT INTO songs (title, score, song_key, user_id) VALUES (?, ?, ?)', [title, score, song_key, id], (err, result) => {
+    db.query('INSERT INTO songs (title, score, song_key, user_id, author) VALUES (?, ?, ?, ?, ? )', [title, score, song_key, id, author], (err, result) => {
         if (err) {
             console.log(err);
             return res.status(500).json({ message: 'Internal server error.', });
