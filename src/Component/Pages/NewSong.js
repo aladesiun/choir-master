@@ -2,13 +2,15 @@ import React, {useState, useRef} from 'react';
 import { Editor }  from '@tinymce/tinymce-react';
 import axios from "axios";
 const NewSong = () => {
+  const user = JSON.parse(localStorage.getItem('user') ?? '[]');
+
     const [newSong, setNewSong] = useState({
         title: '',
         song_key: '',
         score: 'hellosss',
+        token: user.token
     });
     
-    const user = JSON.parse(localStorage.getItem('user') ?? '[]');
     const editorRef = useRef(null);
 
 

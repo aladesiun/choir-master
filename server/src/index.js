@@ -117,10 +117,10 @@ const verifyToken = (token)=>{
 
 // / Create song endpoint
 app.post('/api/songs/create', (req, res) => {
-    const { title, score, song_key} = req.body;
+    const { title, score, song_key, token} = req.body;
 
     // Check if the title, score, and song_key were provided
-    if (!title || !score || !song_key) {
+    if (!title || !score || !song_key || !token) {
         return res.status(400).json({ message: 'title, score, and song_key are required.' });
     }
     let decodedToken= verifyToken(token);
@@ -128,10 +128,10 @@ app.post('/api/songs/create', (req, res) => {
     let {id } =decodedToken; 
 
     // Insert the new song into the database
-    db.query('INSERT INTO songs (title, score, song_key, user_id) VALUES (?, ?, ?)', [title, score, song_key, id], (err, result) => {
+    db.query('INSERT INTO songs (title, score, song_key, user_id) VALUES (?, ?, ?)', [title, score, song_key, id, token], (err, result) => {
         if (err) {
             console.log(err);
-            return res.status(500).json({ message: 'Internal server error.', });
+            return res.status(500).json({ message: 'Internal server error.',err });
         }
 
         // Generate a JWT token with the new song ID and score

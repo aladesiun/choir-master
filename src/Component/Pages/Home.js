@@ -14,15 +14,16 @@ const HomePage = () => {
   };
 
   const handlePrevPage = () => {
-    setCurrentPage(currentPage - 1);
+    setCurrentPage(currentPage != 1 ? currentPage - 1 : currentPage);
   };
   const query = () => {
     setIsLoading(true);
     axios
       .post("http://localhost:4400/api/songs/query", { title: searchString, username: fillterString })
       .then((res) => {
+        let data=res.data;
         setIsLoading(false);
-        setAllSongs(res.data.songs);
+        setAllSongs(data.songs);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -31,7 +32,7 @@ const HomePage = () => {
 
   const handleInput = (e) => {
     setSearchString(e.target.value)
-    console.log(searchString);
+    handlePrevPage()
   }
 
   const getSongs = () => {
@@ -40,15 +41,19 @@ const HomePage = () => {
       .get('http://localhost:4400/api/songs', {
         params: {
           page: currentPage,
-          perPage: 5,
+          perPage: 2,
           title: searchString,
         }
       })
       .then((res) => {
-        if (res.data.status === 200) {
-          setTotalPages(res.data.totalPages);
+        let data = res.data;
+        if (data.status === 200) {
+          setTotalPages(data.totalPages);
+          if (currentPage > data.totalPages) {
+            setCurrentPage(data.totalPages /2);
+          }
           setIsLoading(false);
-          setAllSongs(res.data.songs);
+          setAllSongs(data.songs);
 
         }
       })
