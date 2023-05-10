@@ -93,18 +93,26 @@ app.post('/api/user/verify', (req, res) => {
     if (!token) {
       return res.status(400).json({ message: 'Token is required.' });
     }
-  
-    // Verify the token and extract the user ID and email
-    try {
-      const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-      const { id, email, username, } = decodedToken;
-      res.json({ id, email, username, token, verified: true });
-    } catch (err) {
-      console.log(err);
-      return res.status(401).json({ message: 'Invalid token.' });
-    }
-  });
+    let decodedToken= verifyToken(token);
+    if (decodedToken) {
+        const { id, email, username, } = decodedToken;
+        res.json({ id, email, username, token, verified: true });
+    }else{
+        return res.status(401).json({ message: 'Invalid token.' });
 
+    }
+   
+  });
+//  verify token function
+const verifyToken = (token)=>{
+     // Verify the token and extract the user ID and email
+     try {
+        const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+        return decodedToken;
+      } catch (err) {
+        return false;
+      }
+}
 
 
 // / Create song endpoint
@@ -115,10 +123,12 @@ app.post('/api/songs/create', (req, res) => {
     if (!title || !score || !song_key) {
         return res.status(400).json({ message: 'title, score, and song_key are required.' });
     }
+    let decodedToken= verifyToken(token);
 
+    let {id } =decodedToken; 
 
     // Insert the new song into the database
-    db.query('INSERT INTO songs (title, score, song_key) VALUES (?, ?, ?)', [title, score, song_key], (err, result) => {
+    db.query('INSERT INTO songs (title, score, song_key, user_id) VALUES (?, ?, ?)', [title, score, song_key, id], (err, result) => {
         if (err) {
             console.log(err);
             return res.status(500).json({ message: 'Internal server error.', });
@@ -131,20 +141,54 @@ app.post('/api/songs/create', (req, res) => {
 });
 
 
-//   get songs
+
+
+
+
+
+
+
+
 app.get('/api/songs', (req, res) => {
-
-    db.query("SELECT * FROM songs", (err, result) => {
+    const page = parseInt(req.query.page) || 1; // current page number
+    const perPage = parseInt(req.query.perPage) || 10; // number of items per page
+    const title = req.query.title || '';
+  
+    const offset = (page - 1) * perPage; // calculate the starting index for the current page
+  
+    db.query(`SELECT * FROM songs WHERE title LIKE '%${title}%' LIMIT ${perPage} OFFSET ${offset}`, (err, result) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ message: 'Internal server error.' });
+      }
+  
+      db.query(`SELECT COUNT(*) AS count FROM songs WHERE title LIKE '%${title}%'`, (err, countResult) => {
         if (err) {
-            console.log(err);
-            return res.status(500).json({ message: 'Internal server error.', });
+          console.log(err);
+          return res.status(500).json({ message: 'Internal server error.' });
         }
-
-        let response = { songs: result, status: 200 }
+  
+        const totalCount = countResult[0].count;
+        const totalPages = Math.ceil(totalCount / perPage);
+  
+        const response = {
+          songs: result,
+          totalPages,
+          currentPage: page,
+          totalCount,
+          status:200
+        };
+  
         res.json(response);
+      });
     });
+  });
+  
+  
 
-});
+
+
+
 
 
 // get single song
@@ -165,20 +209,15 @@ app.get('/api/songs/:id', (req, res) => {
 // query  songs
 app.post('/api/songs/query', (req, res) => {
     
-    const { title, username} = req.body;
+    const { title } = req.body;
 
-    // 
-
-    db.query(title ? " SELECT * FROM songs WHERE title LIKE " + title : "SELECT * FROM songs WHERE user_id =" +userId, (err, result) => {
+    db.query("SELECT * FROM songs WHERE title LIKE ?", [`%${title}%`], (err, result) => {
         if (err) {
             return res.status(500).json({ message: 'Internal server error.', });
         }
 
-        let response = {result, status: 200, }
+        let response = {songs:result, status: 200, }
         res.json(response);
     });
-
-
 });
-
 

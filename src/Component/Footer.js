@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div>
         
-<footer className="bg-white shadow dark:bg-gray-800 absolute right-0 left-0 bottom-0">
+<footer className="bg-white shadow dark:bg-gray-800 right-0 left-0 bottom-0">
     <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
         <div className="sm:flex sm:items-center sm:justify-between">
             <Link to='/' className="flex items-center mb-4 sm:mb-0">
