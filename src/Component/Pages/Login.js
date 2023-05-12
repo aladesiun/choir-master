@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 const Login = () => {
+ 
   const [loginDetails, setLoginDetails] = useState({
     password: "",
     email: "",
@@ -27,7 +28,6 @@ const Login = () => {
       .catch((err) => alert(err.response.data.message));
     setError()
   };
-
   return (
     <div>
       <section className="bg-gray-50 dark:bg-gray-900 pt-20 md:pt-0">

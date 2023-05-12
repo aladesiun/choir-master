@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Footer from './Component/Footer';
 import Song from './Component/Song';
 import NewSong from './Component/Pages/NewSong';
+import EditSong from './Component/Pages/editSong';
 function App() {
   return (
     <div className="App">
@@ -22,6 +23,7 @@ function App() {
             <Route path='/Signup' element={<Signup />}/>
             <Route path='/Login' element={<Login />}/>
             <Route path='/Song/:id' element={<Song />}/>
+            <Route path='/Song/edit/:id' element={<EditSong />}/>
             <Route path='/song/create' element={<NewSong />}/>
         </Routes>
         <Footer />

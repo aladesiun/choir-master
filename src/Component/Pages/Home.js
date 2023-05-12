@@ -12,9 +12,11 @@ const HomePage = () => {
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
   };
-
+  const resetCurrentPage = () => {
+    setCurrentPage(1);
+  };
   const handlePrevPage = () => {
-    setCurrentPage(currentPage != 1 ? currentPage - 1 : currentPage);
+    setCurrentPage(currentPage > 2 ? currentPage - 1 : currentPage);
   };
   const query = () => {
     setIsLoading(true);
@@ -32,7 +34,7 @@ const HomePage = () => {
 
   const handleInput = (e) => {
     setSearchString(e.target.value)
-    handlePrevPage()
+    resetCurrentPage()
   }
 
   const getSongs = () => {
@@ -49,9 +51,6 @@ const HomePage = () => {
         let data = res.data;
         if (data.status === 200) {
           setTotalPages(data.totalPages);
-          if (currentPage > data.totalPages) {
-            setCurrentPage(data.totalPages /2);
-          }
           setIsLoading(false);
           setAllSongs(data.songs);
 

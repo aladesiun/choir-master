@@ -1,7 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Footer = () => {
+  const user = JSON.parse(localStorage.getItem('user') ?? "[]");
+  const navigate = useNavigate();
+
+  const logOut = () => {
+    localStorage.clear();
+    navigate('/login');
+  }
+
   return (
     <div>
         
@@ -12,13 +20,20 @@ const Footer = () => {
                 <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white uppercase">ChoirMaster</span>
             </Link>
             <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
-                <li>
+                <li className='cursor-pointer'>
                     <Link to='/' className="mr-4 hover:underline md:mr-6 ">Home</Link>
                 </li>
-                <li>
-                    <Link to='/login' className="mr-4 hover:underline md:mr-6">Login</Link>
+                {
+                    user ? <li className='cursor-pointer'>
+                    <span to=''  onClick={logOut}   className="mr-4 hover:underline md:mr-6">Logout</span>
+                </li>:
+                <li className='cursor-pointer'>
+                    <Link to='/login'  onClick={logOut}   className="mr-4 hover:underline md:mr-6">Login</Link>
                 </li>
-                <li>
+                }
+               
+                
+                <li className='cursor-pointer'>
                     <Link to='/song/create' className="mr-4 hover:underline md:mr-6 ">Create song</Link>
                 </li>
              
