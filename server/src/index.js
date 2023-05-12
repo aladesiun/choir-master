@@ -121,7 +121,7 @@ app.post('/api/songs/create', (req, res) => {
     const { title, score, song_key, id, author} = req.body;
 
     // Check if the title, score, and song_key were provided
-    if (!title || !score || !song_key || !token) {
+    if (!title || !score || !song_key || !author) {
         return res.status(400).json({ message: 'title, score, and song_key are required.' });
     }
 
