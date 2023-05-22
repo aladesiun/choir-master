@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Footer = () => {
-  const user = JSON.parse(localStorage.getItem('user') ?? "[]");
+  const user = JSON.parse(localStorage.getItem('user') ?? "null");
   const navigate = useNavigate();
 
   const logOut = () => {
@@ -24,6 +24,7 @@ const Footer = () => {
                     <Link to='/' className="mr-4 hover:underline md:mr-6 ">Home</Link>
                 </li>
                 {
+
                     user ? <li className='cursor-pointer'>
                     <span to=''  onClick={logOut}   className="mr-4 hover:underline md:mr-6">Logout</span>
                 </li>:

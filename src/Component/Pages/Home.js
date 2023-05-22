@@ -43,7 +43,7 @@ const HomePage = () => {
       .get('http://localhost:4400/api/songs', {
         params: {
           page: currentPage,
-          perPage: 2,
+          perPage: 10,
           title: searchString,
         }
       })
