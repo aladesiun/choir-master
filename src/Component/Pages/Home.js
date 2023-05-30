@@ -9,6 +9,7 @@ const HomePage = () => {
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
   // pagination
+
   const handleNextPage = () => {
     setCurrentPage(currentPage + 1);
   };
@@ -18,19 +19,7 @@ const HomePage = () => {
   const handlePrevPage = () => {
     setCurrentPage(currentPage > 2 ? currentPage - 1 : currentPage);
   };
-  const query = () => {
-    setIsLoading(true);
-    axios
-      .post("http://localhost:4400/api/songs/query", { title: searchString, username: fillterString })
-      .then((res) => {
-        let data=res.data;
-        setIsLoading(false);
-        setAllSongs(data.songs);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-      });
-  }
+
 
   const handleInput = (e) => {
     setSearchString(e.target.value)
