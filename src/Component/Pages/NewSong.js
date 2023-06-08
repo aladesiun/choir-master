@@ -15,6 +15,8 @@ const NewSong = ({ song, update }) => {
     id: user.id,
     author: ''
   });
+  let prevScore = newSong.score;
+
 
   const updateIfSong = () => {
     setNewSong(
@@ -35,6 +37,7 @@ const NewSong = ({ song, update }) => {
 
         }
     )
+    prevScore = newSong.score;
   }
 
 
@@ -57,49 +60,63 @@ const NewSong = ({ song, update }) => {
       setNewSong((prevState) => ({
         ...prevState,
         score: desc
-      }))
-      // editorRef.current.setContent(() => newSong.score)
+      }));
 
     }
 
   }
-  const editorInitConfig = {
-    setup: (editor) => {
-      editor.on('init', () => {
-        editor.setContent(newSong.score);
-      });
-    },
-  }
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    update ? axios.put(`http://localhost:4400/api/songs/${song.id}/update`, newSong) 
-    
-    .then((res) => {
-      if (res.data.status == 200) {
-        setToggleCreate(false);
-        window.location.reload();
-      }
-    })
-    .catch((err) => alert(err.response.data.message)): axios.post("http://localhost:4400/api/songs/create", newSong)
-    
+    update ? axios.put(`http://localhost:4400/api/songs/${song.id}/update`, newSong)
+
       .then((res) => {
-        console.log(res);
-        
         if (res.data.status == 200) {
-         
           setToggleCreate(false);
-          setNewSong({
-            title: '',
-            song_key: '',
-            score: 'hellosss',
-            id: user.id,
-            author: ""
-          })
+          window.location.reload();
         }
       })
-      .catch((err) => alert(err.response.data.message));
+      .catch((err) => alert(err.response.data.message)) : axios.post("http://localhost:4400/api/songs/create", newSong)
+
+        .then((res) => {
+          console.log(res);
+
+          if (res.data.status == 200) {
+
+            setToggleCreate(false);
+            setNewSong({
+              title: '',
+              song_key: '',
+              score: 'hellosss',
+              id: user.id,
+              author: ""
+            })
+          }
+        })
+        .catch((err) => alert(err.response.data.message));
   }
+
+  const copyScore = () => {
+
+    console.log(prevScore);
+    // Remove HTML tags
+    const withoutTags = prevScore.replace(/<[^>]+>/g, '');
+    console.log(withoutTags);
+
+    // Focus the document
+    document.documentElement.focus();
+
+    // Copy the text to the clipboard
+    navigator.clipboard.writeText(withoutTags)
+      .then(() => {
+        alert("Copied the text: " + withoutTags);
+      })
+      .catch((error) => {
+        console.error("Error copying text to clipboard:", error);
+      });
+  };
+
   return (
     <div className="my-5">
       <section className="bg-gray-50 dark:bg-gray-900 pt-32 pb-20">
@@ -111,8 +128,8 @@ const NewSong = ({ song, update }) => {
 
                   {update ? 'Update Your Song' : 'Create  Your Song!'}
                 </h1>
-               {update && <button
-                type='button'
+                {update && <button
+                  type='button'
                   onClick={() => window.location.reload()}
                   className=" w-[100px] my-2 block text-white bg-red-600  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
@@ -182,14 +199,43 @@ const NewSong = ({ song, update }) => {
                       placeholder=""
                     />
                   </div>
+                  {update &&
+                    <>
+                      <input type='text' className='' defaultValue={prevScore} id='prevScore' />
+                      <button onClick={copyScore}
+                        type="button"
+                        className="w-full text-white bg-green-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                      >
+                        copy previous Score
+
+                      </button>
+                    </>
+                  }
+
                   <div>
                     <Editor
+                      apiKey='z04rnfohe8q4u1alj8mdf1o25k5xzjdyfk37qd9bwbt2g0oz'
+
                       // init={editorInitConfig}
                       onEditorChange={e => handleScore(e)}
                       onInit={(evt, editor) => editorRef.current = editor}
-                      // initialValue={newSong.score}
+                      initialValue={newSong.score}
                       Value={newSong.score}
-                      // onChange={(e) => console.log('hii')}
+                      // onKeyUp={e => handleScore(e)}
+                      init={{
+                        height: 500,
+                        menubar: false,
+                        plugins: [
+                            'advlist autolink lists link image charmap print preview anchor',
+                            'searchreplace visualblocks code fullscreen',
+                            'insertdatetime media table paste code help wordcount'
+                        ],
+                        toolbar: 'undo redo | formatselect | ' +
+                            'bold italic backcolor | alignleft aligncenter ' +
+                            'alignright alignjustify | bullist numlist outdent indent | ' +
+                            'removeformat | help',
+                        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                    }}
                       name="score"
 
                     />
