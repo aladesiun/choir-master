@@ -6,7 +6,7 @@ const bcrypt = require('bcrypt');
 const AuthEndpoints = require('./auth/index');
 
 
-
+// Auth endpoins
 AuthEndpoints
 
 
@@ -74,7 +74,7 @@ app.get('/api/songs', (req, res) => {
 
     const offset = (page - 1) * perPage; // calculate the starting index for the current page
 
-    db.query(`SELECT * FROM songs WHERE title LIKE '%${title}%' LIMIT ${perPage} OFFSET ${offset}`, (err, result) => {
+    db.query(`SELECT * FROM songs WHERE title LIKE '%${title}%' ORDER BY created_at DESC  LIMIT ${perPage} OFFSET ${offset}`, (err, result) => {
         if (err) {
             console.log(err);
             return res.status(500).json({ message: 'Internal server error.' });

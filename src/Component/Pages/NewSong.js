@@ -97,25 +97,7 @@ const NewSong = ({ song, update }) => {
         .catch((err) => alert(err.response.data.message));
   }
 
-  const copyScore = () => {
 
-    console.log(prevScore);
-    // Remove HTML tags
-    const withoutTags = prevScore.replace(/<[^>]+>/g, '');
-    console.log(withoutTags);
-
-    // Focus the document
-    document.documentElement.focus();
-
-    // Copy the text to the clipboard
-    navigator.clipboard.writeText(withoutTags)
-      .then(() => {
-        alert("Copied the text: " + withoutTags);
-      })
-      .catch((error) => {
-        console.error("Error copying text to clipboard:", error);
-      });
-  };
 
   return (
     <div className="my-5">
@@ -199,19 +181,6 @@ const NewSong = ({ song, update }) => {
                       placeholder=""
                     />
                   </div>
-                  {update &&
-                    <>
-                      <input type='text' className='' defaultValue={prevScore} id='prevScore' />
-                      <button onClick={copyScore}
-                        type="button"
-                        className="w-full text-white bg-green-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                      >
-                        copy previous Score
-
-                      </button>
-                    </>
-                  }
-
                   <div>
                     <Editor
                       apiKey='z04rnfohe8q4u1alj8mdf1o25k5xzjdyfk37qd9bwbt2g0oz'
@@ -219,23 +188,23 @@ const NewSong = ({ song, update }) => {
                       // init={editorInitConfig}
                       onEditorChange={e => handleScore(e)}
                       onInit={(evt, editor) => editorRef.current = editor}
-                      initialValue={newSong.score}
+                      initialValue={song.score ?? ''}
                       Value={newSong.score}
                       // onKeyUp={e => handleScore(e)}
                       init={{
                         height: 500,
                         menubar: false,
                         plugins: [
-                            'advlist autolink lists link image charmap print preview anchor',
-                            'searchreplace visualblocks code fullscreen',
-                            'insertdatetime media table paste code help wordcount'
+                          'advlist autolink lists link image charmap print preview anchor',
+                          'searchreplace visualblocks code fullscreen',
+                          'insertdatetime media table paste code help wordcount'
                         ],
                         toolbar: 'undo redo | formatselect | ' +
-                            'bold italic backcolor | alignleft aligncenter ' +
-                            'alignright alignjustify | bullist numlist outdent indent | ' +
-                            'removeformat | help',
+                          'bold italic backcolor | alignleft aligncenter ' +
+                          'alignright alignjustify | bullist numlist outdent indent | ' +
+                          'removeformat | help',
                         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-                    }}
+                      }}
                       name="score"
 
                     />
