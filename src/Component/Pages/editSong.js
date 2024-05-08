@@ -13,7 +13,7 @@ const EditSong = () => {
   const [editSong, setEditSong] = useState({
     title: '',
     song_key: '',
-    score: 'hellosss',
+    score: '',
     id: user.id,
     author:""
 

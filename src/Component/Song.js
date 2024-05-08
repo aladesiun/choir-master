@@ -9,9 +9,7 @@ const HomePagesSec = () => {
   const { id } = useParams();
   const [updateToggle, setUpdateToggle] = useState(false);
   const user = JSON.parse(localStorage.getItem('user') ?? "null");
-
   const format = useFormattedTime(songDetails.created_at);
-
 
   const getSong = () => {
     axios
@@ -36,20 +34,23 @@ const HomePagesSec = () => {
       <div className="container max-w-5xl m-auto border bg-white dark:bg-gray-800 rounded-lg border-gray-100 dark:border-gray-700 p-6 sm:px-8">
         {!updateToggle &&
           <div className="wrapper text-center m-auto border rounded border-gray-100 dark:border-gray-700 space-x-2 sm:space-x-3 w-full shadow">
+           {
+            songDetails &&
+            <>
             <div className="py-3 pb-12 sm:py-0 sm:pb-0 relative">
               <h1 className="text-lg sm:text-xl font-semibold dark:text-gray-50 text-gray-900 pt-4 uppercase my-3">
                 {songDetails.title}
                 {songDetails.user_id == user.id ?
                   <button
-                  type='button'
-                  onClick={handleUpdateToggle}
-                  className="absolute right-3 top-0 w-[100px] my-2 block text-white bg-green-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                >
-                  edit
-                </button> : <></>
+                    type='button'
+                    onClick={handleUpdateToggle}
+                    className="absolute right-3 top-0 w-[100px] my-2 block text-white bg-green-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  >
+                    edit
+                  </button> : <></>
                 }
 
-                
+
               </h1>
               <h4 className="text-xs dark:text-gray-50 text-gray-900 rounded-2xl py-1 font-medium my-3">
                 <i className="fas fa-user pr-1"></i>Artist: {songDetails.author}
@@ -69,6 +70,8 @@ const HomePagesSec = () => {
 
 
             </div>
+          </>
+           }
           </div>
 
         }

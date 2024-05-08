@@ -188,7 +188,7 @@ const NewSong = ({ song, update }) => {
                       // init={editorInitConfig}
                       onEditorChange={e => handleScore(e)}
                       onInit={(evt, editor) => editorRef.current = editor}
-                      initialValue={song.score ?? ''}
+                      initialValue={''}
                       Value={newSong.score}
                       // onKeyUp={e => handleScore(e)}
                       init={{
